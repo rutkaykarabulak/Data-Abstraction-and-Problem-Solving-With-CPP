@@ -1,0 +1,5 @@
+# Ignore all .DS_STORE files
+.DS_STORE
+
+# Ignore all temporary execution files
+tempCodeRunnerFile.cpp
