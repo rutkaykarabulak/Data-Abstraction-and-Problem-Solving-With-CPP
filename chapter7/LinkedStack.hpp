@@ -27,6 +27,10 @@ public:
     bool push(const ItemType& newEntry);
     bool pop();
     ItemType peek() const;
+    void display() const;
+    //To the ADT stack given in this chapter, add a void method remove(n) that removes and discards the topmost n
+    //entries from a stack. Write a link-based implementation for this method.
+    bool remove(const int n);
 }; // end LinkedStack
 #endif
 
@@ -34,7 +38,7 @@ public:
 
 template<class ItemType>
 LinkedStack<ItemType>::LinkedStack():
-topptr(nullptr)
+topptr(nullptr), itemCount(0)
 {
     // Initialize an empty stack
 } // end default constructor
@@ -79,6 +83,10 @@ LinkedStack<ItemType>::~LinkedStack()
     while(!isEmpty()){
         pop();
     }
+    /*The destructor given for the link-based implementation of the ADT stack calls pop. Although easy to write,
+     this destructor can be inefficient due to repeated method calls.
+    Write another implementation for the destructor that deallocates the linked nodes directly without calling pop.*/
+    
 } // end destructor
 
 template<class ItemType>
@@ -108,7 +116,7 @@ bool LinkedStack<ItemType>::push(const ItemType& newEntry){
 template<class ItemType>
 bool LinkedStack<ItemType>::pop(){
     if(isEmpty()){
-        throw runtime_error("You can not pop from an empty stack");
+        throw PrecondViolatedExcep("pop() performed from an empty stack");
     }
 
     // stack is not empty, so you can pop from it
@@ -140,3 +148,39 @@ ItemType LinkedStack<ItemType>::peek() const{
     return topptr->getItem();
 } // end peek
 
+template<class ItemType>
+void LinkedStack<ItemType>::display() const{
+    if(isEmpty()){
+        throw PrecondViolatedExcep("display() performed from an empty stack");
+    }
+    Node<ItemType>* currentNode = topptr;
+    int i = 0; // counter
+    while(currentNode!=nullptr && i<itemCount){
+        cout << "("<<currentNode->getItem() << ")" << endl;
+        i++;
+        currentNode = currentNode->getNext();
+    } // now current node points to the nullptr
+}   // end display
+
+template<class ItemType>
+bool LinkedStack<ItemType>::remove(const int n){
+    if(isEmpty() || n>itemCount){
+        throw PrecondViolatedExcep("remove(n) performed from an empty stack or n is greater than item count in a stack");
+    }
+
+    // Conditions are okay, you can perform remove
+    int i = 0;
+    while(!isEmpty() && i<n){
+        // Hold information of node to be deleted
+    Node<ItemType>* nodeToDelete = topptr;
+    // advance topptr
+    topptr = topptr->getNext();
+    // break the link between nodeToDelete and topptr, fail-safe programming
+    nodeToDelete->setNext(nullptr);
+    // delete content of nodeToDelete
+    delete nodeToDelete;
+    i++;
+    } 
+    
+    return true;
+}

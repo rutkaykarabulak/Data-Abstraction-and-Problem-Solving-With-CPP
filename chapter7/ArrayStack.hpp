@@ -34,6 +34,11 @@ public:
     ItemType peek() const;
     
     vector<ItemType> toVector() const; // returns a vector that contains stack items from top to bottom 
+
+    /*To the ADT stack given in this chapter, add a void method remove(n) that removes and discards the topmost n
+    entries from a stack. Write a link-based implementation for this method.*/
+    bool remove(const int n);
+
 }; // end ArrayStack
 
 #endif
@@ -55,7 +60,7 @@ bool ArrayStack<ItemType>::isEmpty() const{
 template<class ItemType>
 bool ArrayStack<ItemType>::push(const ItemType& newEntry){
     if(itemCount == MAX_SIZE){
-        throw runtime_error("You can't push further more");
+        throw logic_error("You can't push further more");
     } // end if
 
     // Stack is not full
@@ -68,7 +73,7 @@ bool ArrayStack<ItemType>::push(const ItemType& newEntry){
 template<class ItemType>
 bool ArrayStack<ItemType>::pop(){
     if(isEmpty()){
-        throw runtime_error("You can't pop from an empty stack");
+        throw logic_error("You can't pop from an empty stack");
     }
 
     // if stack is not empty
@@ -80,7 +85,7 @@ bool ArrayStack<ItemType>::pop(){
 template<class ItemType>
 ItemType ArrayStack<ItemType>::peek() const{
     if(isEmpty()){
-        throw runtime_error("You can't peek top of the stack while it's empty");
+        throw logic_error("You can't peek top of the stack while it's empty");
     }
 
     // you can check if it's not an empty stack
@@ -95,4 +100,18 @@ vector<ItemType> ArrayStack<ItemType>::toVector() const{
         aVector.push_back(items[i]);
     }
     return aVector;
+}
+
+template<class ItemType>
+bool ArrayStack<ItemType>::remove(const int n){
+    if(isEmpty() || n>itemCount){
+        throw logic_error("remove(n) performed from an empty or in unsual conditions");
+    }
+    int i = 0;
+    while(!isEmpty() && i<n){
+        top--;
+        itemCount--;
+        i++;
+    }
+    return true;
 }

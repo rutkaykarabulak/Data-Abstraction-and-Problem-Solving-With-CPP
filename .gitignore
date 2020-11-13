@@ -3,3 +3,6 @@
 
 # Ignore all temporary execution files
 tempCodeRunnerFile.cpp
+
+# Ignore all .vscode settings
+.vscode
