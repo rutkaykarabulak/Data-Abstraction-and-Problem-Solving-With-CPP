@@ -9,6 +9,7 @@
 #include "StackInterface.hpp"
 #include "Node.hpp"
 #include "PrecondViolatedExcep.hpp"
+#include "MemoryAllocationException.hpp"
 using namespace std;
 template<class ItemType>
 class LinkedStack: public StackInterface<ItemType>{
@@ -54,6 +55,9 @@ LinkedStack<ItemType>::LinkedStack(const LinkedStack<ItemType>& aLinkedBag)
      else // if original stack is not empty
      {
         topptr = new Node<ItemType>();
+        if(topptr==nullptr){
+            throw MemoryAllocationException();
+        }
         topptr->setItem(originalTopptr->getItem());
 
         // pointer that points to last node in new Stack
