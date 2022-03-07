@@ -149,14 +149,19 @@ void LinkedList<ItemType>::clear() {
 
 template<class ItemType>
 ItemType LinkedList<ItemType>::getEntry(int position) const {
-    DoublyNode<ItemType>* entry = getEntry(position);
-    return entry;
+    DoublyNode<ItemType>* entry = getNodePtr(position);
+    return entry->getItem();
 }
 
 
 template<class ItemType>
 void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry) {
-    // STUB
+    bool ableToGet = (position >= 1) && (itemCount >= position) && !isEmpty();
+    if(!ableToGet) {
+        throw out_of_range("setEntry() is called with an empty list or invalid position.");
+    }
+    DoublyNode<ItemType>* nodeToSet = getNodePtr(position);
+    nodeToSet->setItem(newEntry);
 }
 
 template<class ItemType>
