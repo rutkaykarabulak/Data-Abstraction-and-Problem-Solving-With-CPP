@@ -20,10 +20,12 @@ class LinkedList: public ListInterface<ItemType> {
 
     public:
     LinkedList();
+    LinkedList(const LinkedList<ItemType>* list);
     ~LinkedList();
     bool isEmpty() const;
     int getLength() const;
     bool insert(int newPosition, const ItemType& newEntry);
+    bool append(const ItemType& newEntry); // it adds the given element to the end of list.
     bool remove(int position);
     void clear();
     ItemType getEntry(int position) const;
@@ -40,6 +42,38 @@ headPtr(nullptr),
 tailPtr(nullptr),
 itemCount(0)
 {
+}
+
+template<class ItemType>
+LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>* list) {
+    DoublyNode<ItemType>* originalHeadPtr = list->headPtr;
+    DoublyNode<ItemType>* originalTailPtr = list->tailPtr;
+    itemCount = list->itemCount;
+    if(originalHeadPtr == nullptr) { // original bag is empty, so is copy
+        headPtr = tailPtr = nullptr;
+        itemCount = 0;
+    } else {
+        DoublyNode<ItemType>* currentNode = originalHeadPtr;
+        headPtr = new DoublyNode<ItemType>(currentNode->getItem()); // initiliaze a new headptr
+        
+        DoublyNode<ItemType>* lastNodePtr = headPtr;
+        currentNode = currentNode->getNext(); // advance the current node
+        while(currentNode != nullptr && currentNode!=originalTailPtr) {
+            // create a new node
+            DoublyNode<ItemType>* newNodePtr = new DoublyNode<ItemType>(currentNode->getItem());
+            // create a chain
+            lastNodePtr->setNext(newNodePtr);
+            newNodePtr->setPrevious(lastNodePtr);
+            // new lastNodePtr
+            lastNodePtr = newNodePtr;
+            // advance currentNode
+            currentNode = currentNode->getNext();
+        }
+        // now it's end of the original list
+        tailPtr = new DoublyNode<ItemType>(originalTailPtr->getItem());
+        lastNodePtr->setNext(tailPtr);
+        tailPtr->setPrevious(lastNodePtr);
+    }
 }
 
 template<class ItemType>
@@ -186,4 +220,29 @@ void LinkedList<ItemType>:: display() const {
         cout << currentNode->getItem() << " ";
         currentNode = currentNode->getNext();
     }
+}
+
+template<class ItemType>
+bool LinkedList<ItemType>::append(const ItemType& newItem) {
+    bool success = false;
+    if ((headPtr == nullptr) && (tailPtr == nullptr)) {
+        // insertion will be the first item
+        DoublyNode<ItemType>* newNodePtr = new DoublyNode<ItemType>(newItem);
+
+        headPtr = tailPtr = newNodePtr;
+        itemCount++;
+        
+        success = true;
+    } else {
+        DoublyNode<ItemType>* newNodePtr = new DoublyNode<ItemType>(newItem);
+        tailPtr->setNext(newNodePtr);
+        newNodePtr->setPrevious(tailPtr);
+        tailPtr = newNodePtr;
+
+        itemCount++;
+
+        success = true;
+    }
+
+    return success;
 }
