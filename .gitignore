@@ -6,3 +6,8 @@ tempCodeRunnerFile.cpp
 
 # Ignore all .vscode settings
 .vscode
+
+# ignore main.cpp and it's compiled version
+main.cpp
+main
+main.dSYM/
