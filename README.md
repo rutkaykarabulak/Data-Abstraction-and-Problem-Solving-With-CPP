@@ -1,11 +1,4 @@
-You can assume this repository as a practice area of book called "Data Abstraction and Problem Solving with C++"
-
-I've created this repository to improve my data structures skills, and for anyone who got stuck at some point of implement those data structures via using that book.
-
-In addition, you can find a bunch of "C++ Interlude" practise belong to book. I used this repository to track my improvement and  process of learning data structures, please do not accept this repository as a solution of all problems belong to book, just accept it as a helper.
-
-Some of implementations belong to me because i used "Sixth Edition" of book, since C++ has gained lots of feature from that day some of implementations did need to change by me, so you can find newest implementation features throughout it.
-
+I've created this repo in order to track my progress on data structures and algorithms. This repo consists of implementation of chapters and interludes of the book. Some implementations can be slightly different from the book, since C++ has gained some new features since the book were published.
 
 Data Abstraction & Problem Solving with C++
 WALLS AND MIRRORS
