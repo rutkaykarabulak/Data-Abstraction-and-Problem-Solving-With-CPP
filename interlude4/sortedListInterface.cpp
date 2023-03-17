@@ -18,6 +18,11 @@ public:
     /// @return true if removal is successful, false otherwise.
     virtual bool removeSorted(const ItemType& anItem) = 0;
 
+    /// @brief Returns the position of given entry in the list.
+    /// @param anItem 
+    /// @return position of entry if it exists, 0 otherwise.
+    virtual int getPosition(const ItemType& anItem) const = 0;
+
     /// @brief Removes the entry in given position if entry is in the list.
     /// @param position of the entry to be removed.
     /// @return true if removal is successful, false otherwise.
@@ -38,6 +43,9 @@ public:
     /// @param position to be searched.
     /// @return Entry that is found.
     virtual ItemType getEntry(const int& position) const = 0;
+
+    /// @brief Destructor
+    virtual ~sortedListInterface() = default;
 
 };
 #endif
