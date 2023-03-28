@@ -1,24 +1,24 @@
 /** Interface for ADT sorted list
- * @file sortedListInterface.cpp
+ * @file SortedListInterface.hpp
 */
 
-#ifndef sorted_list_interface_cpp
-#define sorted_list_interface_cpp
+#ifndef sorted_list_interface_hpp
+#define sorted_list_interface_hpp
 
 template<class ItemType>
-class sortedListInterface {
+class SortedListInterface {
 public:
     /// @brief Inserts the new entry into the list's proper position
     /// so that list remains sorted.
     /// @param newEntry to be inserted.
-    virtual void insertSored(const ItemType& newEntry) = 0;
+    virtual void insertSorted(const ItemType& newEntry) = 0;
 
     /// @brief Removes the first occurance of given entry from the list.
     /// @param anItem to be removed.
     /// @return true if removal is successful, false otherwise.
     virtual bool removeSorted(const ItemType& anItem) = 0;
 
-    /// @brief Returns the position of given entry in the list.
+    /// @brief Returns the position of given entry in the list, or where it should have inserted.
     /// @param anItem 
     /// @return position of entry if it exists, 0 otherwise.
     virtual int getPosition(const ItemType& anItem) const = 0;
@@ -26,7 +26,7 @@ public:
     /// @brief Removes the entry in given position if entry is in the list.
     /// @param position of the entry to be removed.
     /// @return true if removal is successful, false otherwise.
-    virtual bool remove(const int& position) = 0;
+    virtual bool remove(int position) = 0;
 
     /// @brief Checks whether the list is empty or not.
     /// @return true if list is empty, false otherwise.
@@ -42,10 +42,10 @@ public:
     /// @brief Gets the entry in the given position.
     /// @param position to be searched.
     /// @return Entry that is found.
-    virtual ItemType getEntry(const int& position) const = 0;
+    virtual ItemType getEntry(int position) const = 0;
 
     /// @brief Destructor
-    virtual ~sortedListInterface() = default;
+    virtual ~SortedListInterface() = default;
 
 };
 #endif
