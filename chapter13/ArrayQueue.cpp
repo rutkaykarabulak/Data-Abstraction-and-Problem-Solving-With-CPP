@@ -80,5 +80,7 @@ ItemType ArrayQueue<ItemType>::peek() const {
 
 template<class ItemType>
 void ArrayQueue<ItemType>::display() const{
-    // todo
+    for (int i = front; i <= back; i++) {
+        std::cout << items[i] << " ";
+    }
 }
