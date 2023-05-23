@@ -26,3 +26,46 @@ public:
     void setRightChild(int newIndex);
 }; // end TreeNode
 #endif
+
+template<class ItemType>
+TreeNode<ItemType>::TreeNode() {
+    leftChild = 0;
+    rightChild = 0;
+}
+
+template<class ItemType>
+TreeNode<ItemType>::TreeNode(const ItemType& newData, int left, int right) {
+    data = newData;
+    leftChild = left;
+    rightChild = right;
+}
+
+template<class ItemType>
+ItemType TreeNode<ItemType>::getItem() const {
+    return data;
+}
+
+template<class ItemType>
+int TreeNode<ItemType>::getLeftChild() const {
+    return leftChild;
+}
+
+template<class ItemType>
+int TreeNode<ItemType>::getRightChild() const {
+    return rightChild;
+}
+
+template<class ItemType>
+void TreeNode<ItemType>::setItem(const ItemType& newData) {
+    this->data = newData;
+}
+
+template<class ItemType>
+void TreeNode<ItemType>::setLeftChild(int newIndex) {
+    this->leftChild = newIndex;
+}
+
+template<class ItemType>
+void TreeNode<ItemType>::setRightChild(int newIndex) {
+    this->rightChild = newIndex;
+}
