@@ -1,4 +1,4 @@
-/** @file BinaryTreeInterface.cpp 
+/** @file BinaryTreeInterface.hpp 
  * Interface file for binary tree.
  * @author rutkaykarabulak@gmail.com
 */
